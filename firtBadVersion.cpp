@@ -6,7 +6,7 @@
 /*   By: fmehdaou <fmehdaou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 09:19:45 by fmehdaou          #+#    #+#             */
-/*   Updated: 2021/10/22 09:20:34 by fmehdaou         ###   ########.fr       */
+/*   Updated: 2021/10/23 12:08:30 by fmehdaou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,48 @@
 #include <iostream>
 #include <vector>
 
-int binarySearch(int start, int end)
-{
-    int med = (start +end) / 2;            
-    if(isBadVersion(med) && !isBadVersion(med -1))
-        return(med);
-    else if isBadVersion((med - 1))
-        return binarySearch(0, med - 1);
-    else 
-        return binarySearch(med+1, n);
-    return (-1);       
-}
-
-int firstBadVersion(int n)
-{
-        return (binarySearch(0, n));
-}
+std::vector<int> sortedSquares(std::vector<int>& num) {
+       
+        int len = num.size();
+        std::vector<int> v(len, 0);
+        // std::vector<int>::iterator it = num.begin();
+        int sq, tmp;
+        tmp = sq = 0;
+ 
+        for(int i = 0; i < num.size(); i++)
+        {
+            sq = num[i] * num[i];
+            if (i > 0 && sq < v[i - 1])
+            {
+                tmp = v[i - 1];
+                v[i] = sq;
+                v[i +  1] = tmp;
+                std::cout << "swap  " << v[i]  << "|" << v[i+1] << std::endl;
+            }
+            else
+            {
+                v[i] = sq;
+                std::cout << ">>>" << v[i] <<std::endl;
+                // v.insert(it + i, 1, sq);
+            }
+        }
+        return v;
+    }
 
 int main()
 { 
-    std::vector<int> nums;
-    nums.push_back(-1); //0
-    nums.push_back(0); //1
-    nums.push_back(3); //2
-    nums.push_back(5); //3
-    nums.push_back(9); //4
-    nums.push_back(12);// 5
+    std::vector<int> num;
+    num.push_back(-4); 
+    num.push_back(-1); 
+    num.push_back(-0); 
+    num.push_back(3); 
+    num.push_back(10); 
+    std::vector<int> v = sortedSquares(num);
+    for (size_t i = 0; i < v.size(); i++)
+    {
+        std::cout << v[i] << "\t";
+    }
     
-    std::cout << searchInsert(nums, 9) << std::endl;
+   
     return (0);
 };
