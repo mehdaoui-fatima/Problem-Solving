@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_map>
+
 using namespace std;
  int firstUniqChar(string s) {
         unordered_map<char, int> map;
@@ -19,6 +20,7 @@ using namespace std;
                return (i);
         return (-1);
     }
+
     int main()
     {
         cout << firstUniqChar("aaadd") << endl;
